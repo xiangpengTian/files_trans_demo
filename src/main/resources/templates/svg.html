@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<svg id="svg" width="500px" height="500px" style="background-color: #f2f2f2"></svg>
+<script>
+    var svg = document.getElementById("svg");
+    svg.onclick = function(event) {
+        //创建一个圆形元素
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+       //设置坐标点
+        circle.setAttribute("cx", event.offsetX);
+        circle.setAttribute("cy", event.offsetY);
+        circle.setAttribute("r", 10);
+       // circle.setAttribute("fill", randomColor());
+        //设置颜色
+        circle.setAttribute("fill", "red");
+        /**
+         * fill-opacity 用来设置填充颜色透明度（范围：0 - 1）
+         stroke-opacity 用来设置笔触（边框）颜色的透明度（范围：0 - 1）
+         opacity 用来设置元素整体（包括”填充”和”边框”）的透明值（范围: 0 到 1）
+         */
+        circle.setAttribute("opacity", 1);
+        //追加子标签
+        svg.appendChild(circle);
+        var t = setInterval(function() {
+            var r = parseInt(circle.getAttribute("r"));
+            r++;
+            circle.setAttribute("r", r);
+            var opacity = parseFloat(circle.getAttribute("opacity"));
+            opacity -= 0.005;
+            circle.setAttribute("opacity", opacity);
+            if (opacity <= 0) {
+                circle.parentNode.removeChild(circle);
+                clearInterval(t);
+            }
+        }, 10);
+    }
+  /*  function randomColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }*/
+</script>
+</body>
+<script>
+
+</script>
+</html>
